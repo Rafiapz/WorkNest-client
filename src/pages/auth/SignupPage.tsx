@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signupSchema } from "../../schema/signupSchema";
 import { useDispatch, useSelector } from "react-redux";
-import { userSignup } from "../../store/actions/userActions";
+import { fetchUser, userSignup } from "../../store/actions/userActions";
 import { AppDispatch, RootState } from "../../store/store";
 import Loading from "../../components/Loading";
 import toast from "react-hot-toast";
@@ -62,6 +62,7 @@ const SignupPage: FC = () => {
       dispatch(userSignup(formData))
          .unwrap()
          .then(() => {
+            dispatch(fetchUser());
             navigate("/");
          })
          .catch((err: any) => {
