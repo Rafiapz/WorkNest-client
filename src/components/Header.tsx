@@ -43,7 +43,6 @@ const Header: FC = () => {
                      >
                         <Link to={"/login"}>Login</Link>
                      </div>
-
                      <div
                         className={`${
                            location.pathname === "/signup" ? "bg-white text-green-400" : "bg-green-400 text-white hover:bg-green-600"
