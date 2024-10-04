@@ -92,6 +92,7 @@ const MyCalendar = () => {
                      const completed = {
                         backgroundColor: "#d1fae5",
                         color: "gray",
+                        textDecoration: "line-throug",
                      };
                      const notCompleted = {
                         backgroundColor: "#34D399",

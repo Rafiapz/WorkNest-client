@@ -58,7 +58,7 @@ const LoginPage: FC = () => {
                         {isLoading ? (
                            <Loading width={"w-full"} />
                         ) : (
-                           <button type="submit" className="bg-green-400 w-full h-10 text-white rounded-md">
+                           <button type="submit" className="bg-green-400 w-full h-10 text-white  rounded-md">
                               Login
                            </button>
                         )}
