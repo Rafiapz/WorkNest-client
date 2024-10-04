@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 
-const BASE_URL = 'http://localhost:5500'
+const BASE_URL = 'https://worknest-server.onrender.com'
 
 
 const apiClient = axios.create({
