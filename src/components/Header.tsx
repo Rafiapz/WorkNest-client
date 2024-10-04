@@ -10,8 +10,6 @@ const Header: FC = () => {
    const userData: any = useSelector((state: RootState) => state?.user?.user?.data);
    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-   
-
    const toggleDropdown = () => {
       setDropdownOpen(!dropdownOpen);
    };
@@ -56,10 +54,8 @@ const Header: FC = () => {
                ) : (
                   <div className="relative">
                      <div className="flex items-center cursor-pointer" onClick={toggleDropdown}>
-                        <div className="p-2">
-                           <Avatar alt="User settings" rounded />
-                        </div>
-                        <span className="text-white hidden sm:inline-block">{userData.fullName}</span>
+                        <img src={"/no-profile.jpg"} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" />
+                        <span className="text-white hidden sm:inline-block">{userData.fullName}</span> {/* Hide name on small screens */}
                      </div>
 
                      {dropdownOpen && (
