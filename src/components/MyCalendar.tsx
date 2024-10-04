@@ -33,8 +33,8 @@ const MyCalendar = () => {
    };
 
    const handleSelectSlot = (slotInfo: any) => {
+      dispatch(handleSelectedDate(slotInfo.start));
       if (userData?.role === "manager") {
-         dispatch(handleSelectedDate(slotInfo.start));
          openModal();
       }
    };
