@@ -1,11 +1,16 @@
+import React, { Suspense } from "react";
 import DraggableModal from "../../components/DraggableModal";
 import EditTask from "../../components/EditTask";
-import MyCalendar from "../../components/MyCalendar";
+import CalendarLoading from "../../components/CalendarLoading";
+const MyCalendar = React.lazy(() => import("../../components/MyCalendar"));
 
 const HomePage = () => {
    return (
       <div>
-         <MyCalendar />
+         <Suspense fallback={<CalendarLoading />}>
+            <MyCalendar />
+         </Suspense>
+
          <DraggableModal />
          <EditTask />
       </div>

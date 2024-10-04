@@ -90,7 +90,10 @@ const MyCalendar = () => {
                   className="font-bold uppercase"
                   eventPropGetter={() => {
                      return {
-                        className: "bg-green-400",
+                        // className: "bg-green-400",
+                        style: {
+                           backgroundColor: "#34D399",
+                        },
                      };
                   }}
                />
