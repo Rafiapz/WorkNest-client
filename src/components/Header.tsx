@@ -55,7 +55,7 @@ const Header: FC = () => {
                   <div className="relative">
                      <div className="flex items-center  cursor-pointer" onClick={toggleDropdown}>
                         <div className="w-5 p-7">
-                           <Avatar alt="User settings" rounded />
+                           <Avatar alt="User settings" className="w-full h-full" rounded />
                         </div>
                         <span className="text-white hidden sm:inline-block">{userData.fullName}</span>
                      </div>
