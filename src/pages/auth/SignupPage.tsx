@@ -32,7 +32,7 @@ const SignupPage: FC = () => {
    const [error, setError] = useState("");
    const [employeeRole, setEmployeeRole] = useState(false);
    const [managers, setManagers] = useState<{ fullName: string; _id: string }[] | null>(null);
-
+   const [managersLoading, setManagersLoading] = useState(true);
    const dispatch = useDispatch<AppDispatch>();
    const navigate = useNavigate();
 
@@ -41,6 +41,7 @@ const SignupPage: FC = () => {
       try {
          const data = (await fetchManagers()).data;
          setManagers(data?.data);
+         setManagersLoading(false);
       } catch (error) {
          console.log(error);
          toast.error("Failed to load managers");
@@ -128,19 +129,27 @@ const SignupPage: FC = () => {
                            <div className="mt-5">
                               <label className="block text-lg font-semibold mb-1">Select Manager:</label>
                               <span className="text-red-500">{error}</span>
-                              <div className="h-20 overflow-y-auto border border-gray-300 rounded p-2">
-                                 {managers?.map((manager: any) => (
-                                    <label key={manager?._id} className="flex items-center mb-2 cursor-pointer">
-                                       <Field
-                                          type="radio"
-                                          name="managerId"
-                                          value={manager?._id}
-                                          className="h-5 w-5 text-green-400 border-gray-300 focus:ring-green-400"
-                                       />
-                                       <span className="ml-2 text-gray-700">{manager?.fullName}</span>
-                                    </label>
-                                 ))}
-                              </div>
+                              {managersLoading ? (
+                                 <div className="flex flex-col items-center justify-center ">
+                                    <div className="animate-spin rounded-full h-3 w-3 border-t-2 border-blue-500 border-opacity-50 mb-4"></div>
+                                    <p className="text-lg font-semibold text-gray-700">Loading...</p>
+                                    <p className="text-sm text-gray-500 mt-2">This may take a minute to load, please wait.</p>
+                                 </div>
+                              ) : (
+                                 <div className="h-20 overflow-y-auto border border-gray-300 rounded p-2">
+                                    {managers?.map((manager: any) => (
+                                       <label key={manager?._id} className="flex items-center mb-2 cursor-pointer">
+                                          <Field
+                                             type="radio"
+                                             name="managerId"
+                                             value={manager?._id}
+                                             className="h-5 w-5 text-green-400 border-gray-300 focus:ring-green-400"
+                                          />
+                                          <span className="ml-2 text-gray-700">{manager?.fullName}</span>
+                                       </label>
+                                    ))}
+                                 </div>
+                              )}
                               <ErrorMessage name="manager" className="text-red-500 mt-2" component="div" />
                            </div>
                         )}
