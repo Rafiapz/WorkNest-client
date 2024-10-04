@@ -16,3 +16,7 @@ export const editTask = async (form: FormData, id: string) => {
 export const deleteTask = async (id: string) => {
     return apiClient.delete(`/task/delete-task/${id}`)
 }
+
+export const updateStatus = async (id: string, status: boolean) => {
+    return apiClient.put(`/task/task-status-update/${id}?status=${status}`)
+}

@@ -14,7 +14,6 @@ const localizer = momentLocalizer(moment);
 
 const MyCalendar = () => {
    const selectedDate = useSelector((state: RootState) => state?.user?.selectedDate);
-   // const isLoading = useSelector((state: RootState) => state?.user?.myTasks?.loading);
    const events: any = useSelector((state: RootState) => state?.user?.myTasks?.data);
    const userData: any = useSelector((state: RootState) => state?.user?.user?.data);
    const [task, setTask] = useState<any>(null);
@@ -88,11 +87,18 @@ const MyCalendar = () => {
                   views={["month", "agenda"]}
                   onSelectEvent={handleSelectEvent}
                   className="font-bold uppercase"
-                  eventPropGetter={() => {
+                  eventPropGetter={(task) => {
+                     console.log(task, "task hrere");
+                     const completed = {
+                        backgroundColor: "#d1fae5",
+                        color: "gray",
+                     };
+                     const notCompleted = {
+                        backgroundColor: "#34D399",
+                     };
+                     const style = task?.completed ? completed : notCompleted;
                      return {
-                        style: {
-                           backgroundColor: "#34D399",
-                        },
+                        style: style,
                      };
                   }}
                />

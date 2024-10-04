@@ -1,9 +1,13 @@
 import { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPencilAlt, faTrashAlt, faUndoAlt } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
+import { updateStatus } from "../service/api";
+import { handleEditModal } from "../store/slices/userSlice";
+import { fetchMyTasks } from "../store/actions/userActions";
 
 const TaskView: FC<any> = ({ handleEdit, handleDelete, onClose }) => {
    const userData: any = useSelector((state: RootState) => state?.user?.user?.data);
@@ -12,6 +16,19 @@ const TaskView: FC<any> = ({ handleEdit, handleDelete, onClose }) => {
    useEffect(() => {
       setAssignedEmployees(task.assignedTo);
    }, [task]);
+
+   const dispatch = useDispatch<AppDispatch>();
+
+   const handleMarkUncompleted = async (id: string, status: boolean) => {
+      try {
+         const response = await updateStatus(id, status);
+         const updatedTask = response?.data?.data;
+         dispatch(handleEditModal({ task: updatedTask, status: false }));
+         dispatch(fetchMyTasks());
+      } catch (error: any) {
+         toast.error("Failed to update the task");
+      }
+   };
 
    return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
@@ -61,6 +78,20 @@ const TaskView: FC<any> = ({ handleEdit, handleDelete, onClose }) => {
 
             {userData?.role === "manager" && (
                <div className="flex justify-end space-x-10 mt-5">
+                  <button
+                     onClick={!task?.completed ? () => handleMarkUncompleted(task?._id, true) : () => handleMarkUncompleted(task?._id, false)}
+                     className="text-green-600 hover:text-green-800 transition"
+                  >
+                     {task.completed ? (
+                        <>
+                           <FontAwesomeIcon icon={faUndoAlt} className="w-6 h-4" /> <span>Mark as Uncompleted</span>
+                        </>
+                     ) : (
+                        <>
+                           <FontAwesomeIcon icon={faCheck} className="w-6 h-4" /> <span>Mark as Completed</span>
+                        </>
+                     )}
+                  </button>
                   <button onClick={handleEdit} className="text-blue-600 hover:text-blue-800 transition">
                      <FontAwesomeIcon icon={faPencilAlt} className="w-6 h-6" />
                   </button>
