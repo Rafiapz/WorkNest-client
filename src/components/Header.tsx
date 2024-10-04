@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { fetchUser } from "../store/actions/userActions";
-import { Avatar } from "flowbite-react";
 
 const Header: FC = () => {
    const location = useLocation();
