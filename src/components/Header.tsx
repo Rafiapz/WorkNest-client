@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { fetchUser } from "../store/actions/userActions";
+import { Avatar } from "flowbite-react";
 
 const Header: FC = () => {
    const location = useLocation();
@@ -54,8 +55,10 @@ const Header: FC = () => {
                ) : (
                   <div className="relative">
                      <div className="flex items-center cursor-pointer" onClick={toggleDropdown}>
-                        <img src={"../../../public/no-profile.jpg"} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" />
-                        <span className="text-white hidden sm:inline-block">{userData.fullName}</span> {/* Hide name on small screens */}
+                        <div className="p-2">
+                           <Avatar alt="User settings" rounded />
+                        </div>
+                        <span className="text-white hidden sm:inline-block">{userData.fullName}</span>
                      </div>
 
                      {dropdownOpen && (
