@@ -158,7 +158,7 @@ const SignupPage: FC = () => {
 
                      <div className="flex gap-2 justify-center">
                         <p>Already have an account?</p>
-                        <Link to="/login" className="text-green-400">
+                        <Link to="/" className="text-green-400">
                            Login
                         </Link>
                      </div>

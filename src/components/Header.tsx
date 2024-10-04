@@ -35,12 +35,10 @@ const Header: FC = () => {
                   <>
                      <div
                         className={`${
-                           location.pathname === "/login"
-                              ? "bg-white text-green-400 hover:bg-slate-100"
-                              : "bg-green-400 text-white hover:bg-green-600"
+                           location.pathname === "/" ? "bg-white text-green-400 hover:bg-slate-100" : "bg-green-400 text-white hover:bg-green-600"
                         } h-8 font-bold py-1 px-4 rounded cursor-pointer`}
                      >
-                        <Link to={"/login"}>Login</Link>
+                        <Link to={"/"}>Login</Link>
                      </div>
                      <div
                         className={`${
