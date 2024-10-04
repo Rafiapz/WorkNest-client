@@ -25,6 +25,8 @@ const TaskView: FC<any> = ({ handleEdit, handleDelete, onClose }) => {
          const updatedTask = response?.data?.data;
          dispatch(handleEditModal({ task: updatedTask, status: false }));
          dispatch(fetchMyTasks());
+         toast.success("Task updated");
+         onClose();
       } catch (error: any) {
          toast.error("Failed to update the task");
       }
